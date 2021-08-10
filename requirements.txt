@@ -1,0 +1,9 @@
+# external requirements
+pandas
+plotly
+dash
+gunicorn
+parquet
+pyarrow
+fastparquet
+dash_bootstrap_components
