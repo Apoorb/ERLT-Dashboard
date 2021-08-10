@@ -1,5 +1,3 @@
-import pandas as pd
-import plotly.express as px
 import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
@@ -7,7 +5,7 @@ import dash_bootstrap_components as dbc
 
 
 from app import app
-from apps import home, moves_2014b_3_running_comp, moves_2014b_2014_running_comp
+from pages import home, moves_2014b_3_running_comp, moves_2014b_2014_running_comp
 
 # make a reuseable navitem for the different examples
 nav_item = dbc.NavItem(dbc.NavLink("Link", href="#"))
