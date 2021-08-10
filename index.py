@@ -4,6 +4,7 @@ from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 
 
+from app import server
 from app import app
 from pages import home, moves_2014b_3_running_comp, moves_2014b_2014_running_comp
 
