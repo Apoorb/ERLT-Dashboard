@@ -1,8 +1,10 @@
 import dash
 import dash_html_components as html
 import dash_bootstrap_components as dbc
+
 ### Import Dash Instance ###
 from app import app
+
 # needed only if running this as a single page app
 # external_stylesheets = [dbc.themes.DARKLY]
 #
@@ -10,15 +12,69 @@ from app import app
 
 # keep as layout when running in multi-page app.
 # change to app.layout if running as single page app instead
-layout = html.Div(
+
+first_card = dbc.Card(
+    dbc.CardBody(
+        [
+            html.H3("Project Report", className="card-title"),
+            html.H4("Emission rate lookup table (ERLT) project report"),
+            dbc.Button(
+                "Report",
+                href="https://ftp.txdot.gov/pub/txdot-info/env/toolkit/200-01-rpt.pdf",
+                target="_blank",  # open in new page
+                color="primary",
+            ),
+        ]
+    )
+)
+
+second_card = dbc.Card(
+    dbc.CardBody(
+        [
+            html.H3("ERLT Resources", className="card-title"),
+            html.H4("ERLT data, report and other relevant resources."),
+            dbc.Button(
+                "Resources",
+                href="https://www.txdot.gov/inside-txdot/division/environmental/compliance-toolkits/air-quality.html",
+                target="_blank",  # open in new page
+                color="primary",
+            ),
+        ]
+    )
+)
+
+third_card = dbc.Card(
+    dbc.CardBody(
+        [
+            html.H3("Code", className="card-title"),
+            html.H4("Access code/ github repository for building this " "dashboard."),
+            dbc.Button(
+                "Github",
+                href="https://github.com/Apoorb/multipage_faster_erlt_2",
+                target="_blank",  # open in new page
+                color="primary",
+            ),
+        ]
+    )
+)
+
+
+cards = dbc.Row(
     [
-        dbc.Container(
+        dbc.Col(first_card, width=4),
+        dbc.Col(third_card, width=4),
+        dbc.Col(second_card, width=4),
+    ],
+    justify="center",
+)
+
+layout = dbc.Container(
             [
                 dbc.Row(
                     [
                         dbc.Col(
                             html.H1(
-                                "Welcome to the COVID-19 dashboard",
+                                "Texas On-Road Emission Rate Lookup Table " "Dashboard",
                                 className="text-center",
                             ),
                             className="mb-5 mt-5",
@@ -28,8 +84,14 @@ layout = html.Div(
                 dbc.Row(
                     [
                         dbc.Col(
-                            html.H5(
-                                children="This app marks my very first attempt at using Plotly, Dash and Bootstrap! "
+                            html.H4(
+                                children="This dashboard presents the "
+                                "emission rates for nine Texas "
+                                "districts. Emission rates are for "
+                                "running, start, idling, "
+                                "and extended idling processes. "
+                                "Emissions are computed using MOVES "
+                                "2014b."
                             ),
                             className="mb-4",
                         )
@@ -38,105 +100,24 @@ layout = html.Div(
                 dbc.Row(
                     [
                         dbc.Col(
-                            html.H5(
-                                children="It consists of two main pages: Global, which gives an overview of the COVID-19 cases and deaths around the world, "
-                                "Singapore, which gives an overview of the situation in Singapore after different measures have been implemented by the local government."
+                            html.H4(
+                                children="It also presents a comparison of "
+                                "emission rates between MOVES 2014, 2014b "
+                                "and 3."
                             ),
                             className="mb-5",
                         )
                     ]
                 ),
-                dbc.Row(
-                    [
-                        dbc.Col(
-                            dbc.Card(
-                                children=[
-                                    html.H3(
-                                        children="Get the original datasets used in this dashboard",
-                                        className="text-center",
-                                    ),
-                                    dbc.Row(
-                                        [
-                                            dbc.Col(
-                                                dbc.Button(
-                                                    "Global",
-                                                    href="https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data/resource/55e8f966-d5c8-438e-85bc-c7a5a26f4863",
-                                                    color="primary",
-                                                ),
-                                                className="mt-3",
-                                            ),
-                                            dbc.Col(
-                                                dbc.Button(
-                                                    "Singapore",
-                                                    href="https://data.world/hxchua/covid-19-singapore",
-                                                    color="primary",
-                                                ),
-                                                className="mt-3",
-                                            ),
-                                        ],
-                                        justify="center",
-                                    ),
-                                ],
-                                body=True,
-                                color="dark",
-                                outline=True,
-                            ),
-                            width=4,
-                            className="mb-4",
-                        ),
-                        dbc.Col(
-                            dbc.Card(
-                                children=[
-                                    html.H3(
-                                        children="Access the code used to build this dashboard",
-                                        className="text-center",
-                                    ),
-                                    dbc.Button(
-                                        "GitHub",
-                                        href="https://github.com/meredithwan/covid-dash-app",
-                                        color="primary",
-                                        className="mt-3",
-                                    ),
-                                ],
-                                body=True,
-                                color="dark",
-                                outline=True,
-                            ),
-                            width=4,
-                            className="mb-4",
-                        ),
-                        dbc.Col(
-                            dbc.Card(
-                                children=[
-                                    html.H3(
-                                        children="Read the Medium article detailing the process",
-                                        className="text-center",
-                                    ),
-                                    dbc.Button(
-                                        "Medium",
-                                        href="https://medium.com/@meredithwan",
-                                        color="primary",
-                                        className="mt-3",
-                                    ),
-                                ],
-                                body=True,
-                                color="dark",
-                                outline=True,
-                            ),
-                            width=4,
-                            className="mb-4",
-                        ),
-                    ],
-                    className="mb-5",
-                ),
+                cards,
                 html.A(
-                    "Special thanks to Flaticon for the icon in COVID-19 Dash's logo.",
-                    href="https://www.flaticon.com/free-icon/coronavirus_2913604",
+                    "Special thanks to Meredith Wan for providing a clear "
+                    "example of building multi-page dashboard with DASH.",
+                    href="https://towardsdatascience.com/beginners-guide-to-building-a-multi-page-dashboard-using-dash-5d06dbfc7599",
+                    target="_blank",  # open in new page
                 ),
-            ]
+            ],
         )
-    ]
-)
 
 # needed only if running this as a single page app
 # if __name__ == '__main__':

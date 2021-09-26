@@ -9,60 +9,65 @@ from app import app
 from pages import home, moves_2014b_3_running_comp, moves_2014b_2014_running_comp
 
 # make a reuseable navitem for the different examples
-nav_item = dbc.NavItem(dbc.NavLink("Link", href="#"))
+nav_item_r = dbc.NavItem(dbc.NavLink("Running", href="#"))
+nav_item_s = dbc.NavItem(dbc.NavLink("Starts", href="#"))
+nav_item_i = dbc.NavItem(dbc.NavLink("Idling", href="#"))
+nav_item_ei = dbc.NavItem(dbc.NavLink("Extended Idling", href="#"))
 
 # building the navigation bar
 # make a reuseable dropdown for the different examples
 dropdown = dbc.DropdownMenu(
     children=[
-        dbc.DropdownMenuItem("Home", href="/home"),
+        dbc.DropdownMenuItem("Home", href="/home", className="h5"),
         dbc.DropdownMenuItem(
-            "MOVES 2014b vs. 3 Running", href="/moves_2014b_3_running_comp"
+            "MOVES 2014b vs. 3 Running",
+            href="/moves_2014b_3_running_comp",
+            className="h5",
         ),
         dbc.DropdownMenuItem(
-            "MOVES 2014b vs. 2014 Running", href="/moves_2014b_2014_running_comp"
+            "MOVES 2014b vs. 2014 Running",
+            href="/moves_2014b_2014_running_comp",
+            className="h5",
         ),
     ],
     nav=True,
     in_navbar=True,
-    label="Menu",
+    label="ERLT Comparisons",
 )
 
 navbar = dbc.Navbar(
-    dbc.Container(
-        [
-            html.A(
-                # Use row and col to control vertical alignment of logo / brand
-                dbc.Row(
-                    [
-                        dbc.Col(html.Img(src="/assets/emissions.png", height="30px")),
-                        dbc.Col(
-                            dbc.NavbarBrand(
-                                "On-Road Emissions ERLT DASH", className="ml-2"
-                            )
-                        ),
-                    ],
-                    align="center",
-                    no_gutters=True,
-                ),
-                href="/home",
+    [
+        html.A(
+            # Use row and col to control vertical alignment of logo / brand
+            dbc.Row(
+                [
+                    dbc.Col(html.Img(src="/assets/emissions.png", height="40px")),
+                    dbc.Col(dbc.NavbarBrand("On-Road ERLTs", className="ml-2", style={"font-size": "1.5rem"})),
+                ],
+                align="center",
+                no_gutters=True,
             ),
-            dbc.NavbarToggler(id="navbar-toggler2"),
-            dbc.Collapse(
-                dbc.Nav(
-                    # right align dropdown menu with ml-auto className
-                    [nav_item, dropdown],
-                    className="ml-auto",
-                    navbar=True,
-                ),
-                id="navbar-collapse2",
+            href="/home",
+        ),
+        dbc.NavbarToggler(id="navbar-toggler2"),
+        dbc.Collapse(
+            dbc.Nav(
+                # right align dropdown menu with ml-auto className
+                [nav_item_r, nav_item_s, nav_item_i, nav_item_ei, dropdown],
                 navbar=True,
+                className="ml-auto",
+                style={
+                    "padding-right": "100px",
+                    "padding-left": "20px",
+                },  # Remove large margins on left and right.
             ),
-        ]
-    ),
+            id="navbar-collapse2",
+            navbar=True,
+        ),
+    ],
     color="dark",
     dark=True,
-    className="mb-4",
+    className="h4"
 )
 
 
@@ -88,8 +93,13 @@ def display_page(pathname):
 
 
 # embedding the navigation bar
-app.layout = html.Div(
-    [dcc.Location(id="url", refresh=False), navbar, html.Div(id="page-content")]
+app.layout = dbc.Container(
+    [dcc.Location(id="url", refresh=False), navbar, html.Div(id="page-content")],
+    fluid=True,
+    style={
+        "padding-right": "0px",
+        "padding-left": "0px",
+    },  # Remove large margins on left and right.
 )
 
 if __name__ == "__main__":
