@@ -6,7 +6,8 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 from app import app
-
+import dash_table
+import sys
 # needed only if running this as a single page app
 # external_stylesheets = [dbc.themes.DARKLY]
 #
@@ -22,7 +23,6 @@ rename_map = {
     "year_id": "Year",
     "month": "Month",
     "day": "Day",
-    "hour_id": "Hour",
     "road_desc": "Road Description",
     "source_type_name": "Source Type",
     "fuel_type_desc": "Fuel Type",
@@ -32,10 +32,14 @@ rename_map = {
     "per_diff": "Percent Change in MOVES 3 Emissions",
     "rate_per_distance": "Running Emission Rate (grams/mile)",
 }
+hours = erlt_df_2014b_3.hour_id.unique()
+hours_lab = "_".join([str(hour) for hour in hours])
+
+erlt_df_2014b_3 = erlt_df_2014b_3.drop(columns="hour_id")
+# Only has hour 9 in it
 erlt_df_2014b_3_1 = erlt_df_2014b_3.rename(columns=rename_map).filter(
     items=rename_map.values()
 )
-
 
 sut_label_value = [
     {"label": sut, "value": sut} for sut in erlt_df_2014b_3_1["Source Type"].unique()
@@ -70,7 +74,7 @@ year_label_dict = [
 ]
 
 
-title_1 = html.H2("MOVES 2014b vs. MOVES 3 Running Emission Comparison")
+title_1 = html.H3("MOVES 2014b vs. MOVES 3 Running Emission Comparison")
 dropdown_2 = dcc.Dropdown(
     id="pollutant-dropdown",
     options=pollutants_label_value,
@@ -80,20 +84,45 @@ dropdown_2 = dcc.Dropdown(
     optionHeight=25,
 )
 
+def table_type(df_column):
+    # Note - this only works with Pandas >= 1.0.0
+
+    if sys.version_info < (3, 0):  # Pandas 1.0.0 does not support Python 2
+        return 'any'
+    if isinstance(df_column.dtype, pd.DatetimeTZDtype):
+        return 'datetime',
+    elif (isinstance(df_column.dtype, pd.StringDtype) or
+            isinstance(df_column.dtype, pd.BooleanDtype) or
+            isinstance(df_column.dtype, pd.CategoricalDtype) or
+            isinstance(df_column.dtype, pd.PeriodDtype) or
+            pd.api.types.is_string_dtype(df_column)):
+        return 'text'
+    elif (isinstance(df_column.dtype, pd.SparseDtype) or
+            isinstance(df_column.dtype, pd.IntervalDtype) or
+            isinstance(df_column.dtype, pd.Int8Dtype) or
+            isinstance(df_column.dtype, pd.Int16Dtype) or
+            isinstance(df_column.dtype, pd.Int32Dtype) or
+            isinstance(df_column.dtype, pd.Int64Dtype) or
+            pd.api.types.is_numeric_dtype(df_column)):
+        return 'numeric'
+    else:
+        return 'any'
+
 
 layout = dbc.Container(
     [
         dbc.Row(title_1, className="mb-2"),
-        dbc.Row(dbc.Col(dropdown_2, width=3, align="left", className="mb-4")),
+        dbc.Row(dbc.Col(dropdown_2, width=3, align="left", className="mb-6")),
         dbc.Row(
             dbc.Card(
-                html.H3(
-                    "El Paso MOVES 2014b vs. 3 Running Emission Comparison by Road Type",
+                html.H4(
+                    "El Paso MOVES 2014b vs. 3 Running Emission Comparison by "
+                    f"Road Type for hour {hours_lab} – {int(hours_lab)+1} AM",
                     className="text-center text-light bg-dark",
                 ),
                 body=True,
             ),
-            className="mt-4 mb-4",
+            className="mb-4",
         ),
         dbc.Row(
             [
@@ -154,9 +183,9 @@ layout = dbc.Container(
         ),
         dbc.Row(
             dbc.Card(
-                html.H3(
+                html.H4(
                     "El Paso MOVES 2014b vs. 3 Running Emission "
-                    "Comparison Data",
+                    "Comparison Data for Hour ",
                     className="text-center text-light bg-dark",
                 ),
                 body=True,
@@ -164,7 +193,46 @@ layout = dbc.Container(
             className="mt-4 mb-4",
         ),
         dbc.Row(
-        dbc.Table.from_dataframe(erlt_df_2014b_3_1.head(), striped=True, bordered=True, hover=True)
+            dash_table.DataTable(
+                    id='datatable_interactivity',
+                    columns=[
+                        {"name": i, "id": i, 'type': table_type(erlt_df_2014b_3_1[i])} for i in erlt_df_2014b_3_1.columns
+                    ],
+                    data=erlt_df_2014b_3_1.to_dict('records'),
+                    filter_action="native",
+                    sort_action="native",
+                    sort_mode="multi",
+                    column_selectable="single",
+                    row_selectable="multi",
+                    selected_columns=[],
+                    selected_rows=[],
+                    page_action="native",
+                    page_current=0,
+                    page_size=10,
+                    style_header={'backgroundColor': 'rgb(30, 30, 30)',  'color': 'white'},
+                    style_cell={
+                            'backgroundColor': 'rgb(50, 50, 50)',
+                            'color': 'white',
+                            'whiteSpace': 'normal',
+                            'height': 'auto'
+                        },
+                    style_filter={"height": "25px"},
+                    css=[{
+                            'selector': 'table',
+                            'rule': 'table-layout: fixed'  # note - this does not work with fixed_rows
+                        }],
+
+                    # style_data_conditional=[
+                    #               {
+                    #                    "if": {"state": "active"},
+                    #                    "border": ".5px solid ",
+                    #                    "fontWeight" : 1000,
+                    #                },
+                    #                {"if": {"state": "selected"},
+                    #                 "fontWeight": 700,
+                    #                 },
+                    #            ],
+                ), className="dbc_dark"
         )
     ],
     fluid=True,
@@ -228,7 +296,7 @@ def update_line_chart(sut_val, fuel_val, pollutant_val, year_val):
     )
 
     fig.update_layout(
-        font=dict(family="Time New Roman", size=24, color="white"),
+        font=dict(family="Time New Roman", size=20, color="white"),
         yaxis=dict(
             range=(2 * min_em, max_em * 1.2),
             showexponent="all",
