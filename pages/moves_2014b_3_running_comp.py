@@ -81,7 +81,7 @@ dropdown_2 = dcc.Dropdown(
     value="CO",
     multi=False,
     className="dbc_dark",
-    optionHeight=25,
+    optionHeight=20,
 )
 
 def table_type(df_column):
@@ -111,23 +111,24 @@ def table_type(df_column):
 
 layout = dbc.Container(
     [
-        dbc.Row(title_1, className="mb-2"),
-        dbc.Row(dbc.Col(dropdown_2, width=3, align="left", className="mb-6")),
+        dbc.Row(title_1, className="mb-0"),
+        dbc.Row(dbc.Col(dropdown_2, width=3, align="left")),
         dbc.Row(
             dbc.Card(
                 html.H4(
                     "El Paso MOVES 2014b vs. 3 Running Emission Comparison by "
-                    f"Road Type for hour {hours_lab} – {int(hours_lab)+1} AM",
+                    f"Road Type for Hour {hours_lab} – {int(hours_lab)+1} AM",
                     className="text-center text-light bg-dark",
                 ),
                 body=True,
+                style={"padding": "6px"}
             ),
-            className="mb-4",
+            className="mt-3 mb-2",
         ),
         dbc.Row(
             [
-                dbc.Col(dcc.Graph(id="erlt_comp_line"), className="mb-2 col-md-8"),
-                dbc.Col(dcc.Graph(), className="mb-2 col-md-4"),
+                dbc.Col(dcc.Graph(id="erlt_comp_line", style={'width':'100%','height':'400px'}), className="mb-2 col-md-8"),
+                dbc.Col(dcc.Graph(style={'width':'100%','height':'400px'}), className="mb-2 col-md-4"),
             ]
         ),
         dbc.Row(
@@ -145,7 +146,7 @@ layout = dbc.Container(
             ],
             justify="start",
             no_gutters=True,
-            style={"height": "1.85rem", "font-size": "1.25rem"},
+            style={"height": "1.5rem", "font-size": "1rem"},
         ),
         dbc.Row(
             [
@@ -162,7 +163,7 @@ layout = dbc.Container(
             ],
             justify="start",
             no_gutters=True,
-            style={"height": "1.85rem", "font-size": "1.25rem"},
+            style={"height": "1.5rem", "font-size": "1rem"},
         ),
         dbc.Row(
             [
@@ -179,16 +180,18 @@ layout = dbc.Container(
             ],
             justify="start",
             no_gutters=True,
-            style={"height": "1.85rem", "font-size": "1.25rem"},
+            style={"height": "1.5rem", "font-size": "1rem"},
         ),
         dbc.Row(
             dbc.Card(
                 html.H4(
                     "El Paso MOVES 2014b vs. 3 Running Emission "
-                    "Comparison Data for Hour ",
+                    f"Comparison Data for Hour "
+                    f"{hours_lab} – {int(hours_lab)+1} AM",
                     className="text-center text-light bg-dark",
                 ),
                 body=True,
+                style={"padding": "6px"}
             ),
             className="mt-4 mb-4",
         ),
@@ -214,24 +217,15 @@ layout = dbc.Container(
                             'backgroundColor': 'rgb(50, 50, 50)',
                             'color': 'white',
                             'whiteSpace': 'normal',
+                            'textAlign': 'center',
                             'height': 'auto'
                         },
                     style_filter={"height": "25px"},
                     css=[{
                             'selector': 'table',
-                            'rule': 'table-layout: fixed'  # note - this does not work with fixed_rows
-                        }],
+                            'rule': 'table-layout: fixed'
+                        }], # Wrap text
 
-                    # style_data_conditional=[
-                    #               {
-                    #                    "if": {"state": "active"},
-                    #                    "border": ".5px solid ",
-                    #                    "fontWeight" : 1000,
-                    #                },
-                    #                {"if": {"state": "selected"},
-                    #                 "fontWeight": 700,
-                    #                 },
-                    #            ],
                 ), className="dbc_dark"
         )
     ],
@@ -296,7 +290,7 @@ def update_line_chart(sut_val, fuel_val, pollutant_val, year_val):
     )
 
     fig.update_layout(
-        font=dict(family="Time New Roman", size=20, color="white"),
+        font=dict(family="Time New Roman", size=17, color="white"),
         yaxis=dict(
             range=(2 * min_em, max_em * 1.2),
             showexponent="all",

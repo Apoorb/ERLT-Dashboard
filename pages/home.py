@@ -17,7 +17,7 @@ first_card = dbc.Card(
     dbc.CardBody(
         [
             html.H3("Project Report", className="card-title"),
-            html.H4("Emission rate lookup table (ERLT) project report"),
+            html.H5("Emission rate lookup table (ERLT) project report"),
             dbc.Button(
                 "Report",
                 href="https://ftp.txdot.gov/pub/txdot-info/env/toolkit/200-01-rpt.pdf",
@@ -32,7 +32,7 @@ second_card = dbc.Card(
     dbc.CardBody(
         [
             html.H3("ERLT Resources", className="card-title"),
-            html.H4("ERLT data, report and other relevant resources."),
+            html.H5("ERLT data, report and other relevant resources."),
             dbc.Button(
                 "Resources",
                 href="https://www.txdot.gov/inside-txdot/division/environmental/compliance-toolkits/air-quality.html",
@@ -47,7 +47,7 @@ third_card = dbc.Card(
     dbc.CardBody(
         [
             html.H3("Code", className="card-title"),
-            html.H4("Access code/ github repository for building this " "dashboard."),
+            html.H5("Access code/ github repository for building this " "dashboard."),
             dbc.Button(
                 "Github",
                 href="https://github.com/Apoorb/multipage_faster_erlt_2",
@@ -60,12 +60,13 @@ third_card = dbc.Card(
 
 
 cards = dbc.Row(
+    dbc.CardGroup(
     [
         dbc.Col(first_card, width=4),
         dbc.Col(third_card, width=4),
         dbc.Col(second_card, width=4),
     ],
-    justify="center",
+),    justify="center",
 )
 
 layout = dbc.Container(
@@ -73,7 +74,7 @@ layout = dbc.Container(
                 dbc.Row(
                     [
                         dbc.Col(
-                            html.H1(
+                            html.H2(
                                 "Texas On-Road Emission Rate Lookup Table " "Dashboard",
                                 className="text-center",
                             ),
@@ -84,7 +85,7 @@ layout = dbc.Container(
                 dbc.Row(
                     [
                         dbc.Col(
-                            html.H4(
+                            html.H5(
                                 children="This dashboard presents the "
                                 "emission rates for nine Texas "
                                 "districts. Emission rates are for "
@@ -100,7 +101,7 @@ layout = dbc.Container(
                 dbc.Row(
                     [
                         dbc.Col(
-                            html.H4(
+                            html.H5(
                                 children="It also presents a comparison of "
                                 "emission rates between MOVES 2014, 2014b "
                                 "and 3."

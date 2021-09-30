@@ -41,8 +41,8 @@ navbar = dbc.Navbar(
             # Use row and col to control vertical alignment of logo / brand
             dbc.Row(
                 [
-                    dbc.Col(html.Img(src="/assets/emissions.png", height="40px")),
-                    dbc.Col(dbc.NavbarBrand("On-Road ERLTs", className="ml-2", style={"font-size": "1.5rem"})),
+                    dbc.Col(html.Img(src="/assets/emissions.png", height="20px")),
+                    dbc.Col(dbc.NavbarBrand("On-Road ERLTs", className="ml-2", style={"font-size": "20px"})),
                 ],
                 align="center",
                 no_gutters=True,
@@ -67,7 +67,7 @@ navbar = dbc.Navbar(
     ],
     color="dark",
     dark=True,
-    className="h4"
+    className="h5"
 )
 
 

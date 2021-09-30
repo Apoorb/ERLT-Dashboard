@@ -181,6 +181,7 @@ dbc_dark .Select-menu-outer {
 
 .dbc_dark .dash-spreadsheet .dash-header {
     font-weight: bold;
+    textAlign: left;
     background-color: var(--dark) !important;
     opacity: 0.9;
     color: var(--light) !important;
