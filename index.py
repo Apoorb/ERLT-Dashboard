@@ -1,5 +1,5 @@
-import dash_html_components as html
-import dash_core_components as dcc
+from dash import html
+from dash import dcc
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 
@@ -42,7 +42,13 @@ navbar = dbc.Navbar(
             dbc.Row(
                 [
                     dbc.Col(html.Img(src="/assets/emissions.png", height="20px")),
-                    dbc.Col(dbc.NavbarBrand("On-Road ERLTs", className="ml-2", style={"font-size": "20px"})),
+                    dbc.Col(
+                        dbc.NavbarBrand(
+                            "On-Road ERLTs",
+                            className="ml-2",
+                            style={"font-size": "20px"},
+                        )
+                    ),
                 ],
                 align="center",
                 no_gutters=True,
@@ -67,7 +73,7 @@ navbar = dbc.Navbar(
     ],
     color="dark",
     dark=True,
-    className="h5"
+    className="h5",
 )
 
 

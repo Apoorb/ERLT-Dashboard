@@ -1,5 +1,6 @@
 import dash
-import dash_html_components as html
+from dash import html
+from dash import dcc
 import dash_bootstrap_components as dbc
 
 ### Import Dash Instance ###
@@ -61,64 +62,65 @@ third_card = dbc.Card(
 
 cards = dbc.Row(
     dbc.CardGroup(
-    [
-        dbc.Col(first_card, width=4),
-        dbc.Col(third_card, width=4),
-        dbc.Col(second_card, width=4),
-    ],
-),    justify="center",
+        [
+            dbc.Col(first_card, width=4),
+            dbc.Col(third_card, width=4),
+            dbc.Col(second_card, width=4),
+        ]
+    ),
+    justify="center",
 )
 
 layout = dbc.Container(
+    [
+        dbc.Row(
             [
-                dbc.Row(
-                    [
-                        dbc.Col(
-                            html.H2(
-                                "Texas On-Road Emission Rate Lookup Table " "Dashboard",
-                                className="text-center",
-                            ),
-                            className="mb-5 mt-5",
-                        )
-                    ]
-                ),
-                dbc.Row(
-                    [
-                        dbc.Col(
-                            html.H5(
-                                children="This dashboard presents the "
-                                "emission rates for nine Texas "
-                                "districts. Emission rates are for "
-                                "running, start, idling, "
-                                "and extended idling processes. "
-                                "Emissions are computed using MOVES "
-                                "2014b."
-                            ),
-                            className="mb-4",
-                        )
-                    ]
-                ),
-                dbc.Row(
-                    [
-                        dbc.Col(
-                            html.H5(
-                                children="It also presents a comparison of "
-                                "emission rates between MOVES 2014, 2014b "
-                                "and 3."
-                            ),
-                            className="mb-5",
-                        )
-                    ]
-                ),
-                cards,
-                html.A(
-                    "Special thanks to Meredith Wan for providing a clear "
-                    "example of building multi-page dashboard with DASH.",
-                    href="https://towardsdatascience.com/beginners-guide-to-building-a-multi-page-dashboard-using-dash-5d06dbfc7599",
-                    target="_blank",  # open in new page
-                ),
-            ],
-        )
+                dbc.Col(
+                    html.H2(
+                        "Texas On-Road Emission Rate Lookup Table " "Dashboard",
+                        className="text-center",
+                    ),
+                    className="mb-5 mt-5",
+                )
+            ]
+        ),
+        dbc.Row(
+            [
+                dbc.Col(
+                    html.H5(
+                        children="This dashboard presents the "
+                        "emission rates for nine Texas "
+                        "districts. Emission rates are for "
+                        "running, start, idling, "
+                        "and extended idling processes. "
+                        "Emissions are computed using MOVES "
+                        "2014b."
+                    ),
+                    className="mb-4",
+                )
+            ]
+        ),
+        dbc.Row(
+            [
+                dbc.Col(
+                    html.H5(
+                        children="It also presents a comparison of "
+                        "emission rates between MOVES 2014, 2014b "
+                        "and 3."
+                    ),
+                    className="mb-5",
+                )
+            ]
+        ),
+        cards,
+        html.A(
+            "Special thanks to Meredith Wan for providing a clear "
+            "example of building multi-page dashboard with DASH.",
+            href="https://towardsdatascience.com/beginners-guide-to-building-a-multi-page-dashboard-using-dash-5d06dbfc7599",
+            target="_blank",  # open in new page
+        ),
+    ]
+)
 
 # needed only if running this as a single page app
 # if __name__ == '__main__':
