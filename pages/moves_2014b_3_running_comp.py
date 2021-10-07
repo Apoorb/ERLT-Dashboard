@@ -37,6 +37,19 @@ hours = erlt_df_2014b_3.hour_id.unique()
 hours_lab = "_".join([str(hour) for hour in hours])
 
 erlt_df_2014b_3 = erlt_df_2014b_3.drop(columns="hour_id")
+
+erlt_df_2014b_3["moves"] = erlt_df_2014b_3.moves.map(
+    {"MOVES 2014b": "2014b", "MOVES 3": "3"}
+)
+
+erlt_df_2014b_3["source_type_name"] = erlt_df_2014b_3.source_type_name.map(
+    {"Passenger Car": "PC", "Combination Long-haul Truck": "CLhT"}
+)
+
+erlt_df_2014b_3["fuel_type_desc"] = erlt_df_2014b_3.fuel_type_desc.map(
+    {"Gasoline": "Gas", "Diesel Fuel": "Diesel"}
+)
+
 erlt_df_2014b_3["road_desc"] = erlt_df_2014b_3.road_desc.map(
     {
         "Rural Restricted Access": "Rural Restricted",
@@ -45,6 +58,8 @@ erlt_df_2014b_3["road_desc"] = erlt_df_2014b_3.road_desc.map(
         "Urban Unrestricted Access": "Urban Unrestricted",
     }
 )
+
+
 erlt_df_2014b_3["avg_speed_bin_desc"] = erlt_df_2014b_3.avg_speed_bin_desc.map(
     {
         "speed < 2.5mph": "[0, 2.5)",
@@ -180,10 +195,7 @@ layout = dbc.Container(
                 dbc.Col(html.P("Select Vehicle Type:"), width=2),
                 dbc.Col(
                     dbc.RadioItems(
-                        id="sut-radio",
-                        options=sut_label_value,
-                        value="Passenger Car",
-                        inline=True,
+                        id="sut-radio", options=sut_label_value, value="PC", inline=True
                     ),
                     width=10,
                 ),
@@ -256,7 +268,7 @@ layout = dbc.Container(
                 selected_rows=[],
                 page_action="native",
                 page_current=0,
-                page_size=10,
+                page_size=20,
                 style_header={"backgroundColor": "rgb(30, 30, 30)", "color": "white"},
                 style_cell={
                     "backgroundColor": "rgb(50, 50, 50)",
@@ -265,6 +277,10 @@ layout = dbc.Container(
                     "textAlign": "center",
                     "height": "auto",
                 },
+                style_cell_conditional=[
+                    {"if": {"column_id": "Road Description"}, "width": "11%"},
+                    {"if": {"column_id": "Average Speed Bin (mph)"}, "width": "10%"},
+                ],
                 style_filter={"height": "25px"},
                 css=[{"selector": "table", "rule": "table-layout: fixed"}],  # Wrap text
             ),
@@ -380,10 +396,10 @@ def update_line_chart(sut_val, fuel_val, pollutant_val, year_val):
     Output("erlt_comp_bar", "figure"),
     [
         Input("erlt_comp_line", "hoverData"),
-        State("sut-radio", "value"),
-        State("fuel-radio", "value"),
-        State("pollutant-dropdown", "value"),
-        State("year-radio", "value"),
+        Input("sut-radio", "value"),
+        Input("fuel-radio", "value"),
+        Input("pollutant-dropdown", "value"),
+        Input("year-radio", "value"),
     ],
 )
 def update_bar_chart(hoverdata, sut_val, fuel_val, pollutant_val, year_val):
