@@ -2,9 +2,9 @@ REM login to your Heroku account
 heroku login
 
 REM change dash-app to a unique name
-heroku create multipage-erlt-dashboard-3
+heroku create multipage-erlt-dashboard-4
 REM change remote
-heroku git:remote -a multipage-erlt-dashboard-3
+heroku git:remote -a multipage-erlt-dashboard-4
 git remote -v
 
 REM deploy to Heroku
