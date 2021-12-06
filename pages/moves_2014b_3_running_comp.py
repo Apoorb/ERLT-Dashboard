@@ -424,6 +424,7 @@ def update_bar_chart(hoverdata, sut_val, fuel_val, pollutant_val, year_val):
         data_frame=erlt_df_2014_2014b_1_fil,
         x="Road Description",
         y="Running Emission Rate (grams/mile)",
+        text="Running Emission Rate (grams/mile)",
         hover_data=rename_map.values(),
         color="MOVES",
         pattern_shape="MOVES",
@@ -431,8 +432,12 @@ def update_bar_chart(hoverdata, sut_val, fuel_val, pollutant_val, year_val):
         pattern_shape_sequence=["+", "x"],
         template="plotly_dark",
     )
+    fig.update_traces(
+        texttemplate='%{text:.3s}',
+        textposition='outside',)
     fig.update_layout(
-        font=dict(family="Time New Roman", size=15, color="white"),
+        uniformtext_minsize=12,
+        font=dict(family="Time New Roman", size=14, color="white"),
         yaxis=dict(
             range=(2 * min_em, max_em * 1.2), showexponent="all", exponentformat="e"
         ),
@@ -446,11 +451,11 @@ def update_bar_chart(hoverdata, sut_val, fuel_val, pollutant_val, year_val):
         x=0,
         y=1,
         showarrow=False,
-        font_size=17,
+        font_size=16,
     )
 
     return fig
 
 
-if __name__ == "__main__":
-    app.run_server(debug=True)
+# if __name__ == "__main__":
+#     app.run_server(debug=True)

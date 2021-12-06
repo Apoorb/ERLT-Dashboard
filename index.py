@@ -6,13 +6,16 @@ import dash_bootstrap_components as dbc
 
 from app import server
 from app import app
-from pages import home, moves_2014b_3_running_comp, moves_2014b_2014_running_comp
+from pages import (Running, Starts, Idling, ExtendedIdling, home,
+                   moves_2014b_3_running_comp, moves_2014_3_starts_comp,
+                   moves_2014b_3_idling_comp, moves_2014b_3_extidle_comp)
 
 # make a reuseable navitem for the different examples
-nav_item_r = dbc.NavItem(dbc.NavLink("Running", href="#"))
-nav_item_s = dbc.NavItem(dbc.NavLink("Starts", href="#"))
-nav_item_i = dbc.NavItem(dbc.NavLink("Idling", href="#"))
-nav_item_ei = dbc.NavItem(dbc.NavLink("Extended Idling", href="#"))
+nav_item_h = dbc.NavItem(dbc.NavLink("Home", href="/home"))
+nav_item_r = dbc.NavItem(dbc.NavLink("Running", href="/Running"))
+nav_item_s = dbc.NavItem(dbc.NavLink("Starts", href="/Starts"))
+nav_item_i = dbc.NavItem(dbc.NavLink("Idling", href="/Idling"))
+nav_item_ei = dbc.NavItem(dbc.NavLink("Extended Idling", href="/ExtendedIdling"))
 
 # building the navigation bar
 # make a reuseable dropdown for the different examples
@@ -25,8 +28,18 @@ dropdown = dbc.DropdownMenu(
             className="h5",
         ),
         dbc.DropdownMenuItem(
-            "MOVES 2014b vs. 2014 Running",
-            href="/moves_2014b_2014_running_comp",
+            "MOVES 2014b vs. 3 Starts",
+            href="/moves_2014_3_starts_comp",
+            className="h5",
+        ),
+        dbc.DropdownMenuItem(
+            "MOVES 2014b vs. 3 Idling",
+            href="/moves_2014b_3_idling_comp",
+            className="h5",
+        ),
+        dbc.DropdownMenuItem(
+            "MOVES 2014b vs. 3\nExtended Idling",
+            href="/moves_2014b_3_extidle_comp",
             className="h5",
         ),
     ],
@@ -59,7 +72,7 @@ navbar = dbc.Navbar(
         dbc.Collapse(
             dbc.Nav(
                 # right align dropdown menu with ml-auto className
-                [nav_item_r, nav_item_s, nav_item_i, nav_item_ei, dropdown],
+                [nav_item_h, nav_item_r, nav_item_s, nav_item_i, nav_item_ei, dropdown],
                 navbar=True,
                 className="ml-auto",
                 style={
@@ -92,8 +105,20 @@ def toggle_navbar_collapse(n, is_open):
 def display_page(pathname):
     if pathname == "/moves_2014b_3_running_comp":
         return moves_2014b_3_running_comp.layout
-    elif pathname == "/moves_2014b_2014_running_comp":
-        return moves_2014b_2014_running_comp.layout
+    elif pathname == "/moves_2014_3_starts_comp":
+        return moves_2014_3_starts_comp.layout
+    elif pathname == "/moves_2014b_3_idling_comp":
+        return moves_2014b_3_idling_comp.layout
+    elif pathname == "/moves_2014b_3_extidle_comp":
+        return moves_2014b_3_extidle_comp.layout
+    elif pathname == "/Running":
+        return Running.layout
+    elif pathname == "/Starts":
+        return Starts.layout
+    elif pathname == "/Idling":
+        return Idling.layout
+    elif pathname == "/ExtendedIdling":
+        return ExtendedIdling.layout
     else:
         return home.layout
 
