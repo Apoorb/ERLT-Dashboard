@@ -105,7 +105,7 @@ layout = dbc.Container(
                 dbc.Col(
                     html.H5(
                         children="It also presents a comparison of "
-                        "emission rates between MOVES 2014, 2014b "
+                        "emission rates between MOVES 2014b "
                         "and 3."
                     ),
                     className="mb-5",
