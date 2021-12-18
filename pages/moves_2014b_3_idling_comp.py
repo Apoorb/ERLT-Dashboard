@@ -23,6 +23,8 @@ rename_map = {
     "per_diff": "Percent Change in MOVES 3 Emissions",
     "rate_per_hour": "Idling Emission Rate (grams/hour)",
 }
+erlt_df_2014b_3["rate_per_hour"] = erlt_df_2014b_3.rate_per_hour.round(6)
+
 hours = erlt_df_2014b_3.hour_id.unique()
 hours_lab = "_".join([str(hour) for hour in hours])
 erlt_df_2014b_3["moves"] = erlt_df_2014b_3.moves.map(

@@ -24,6 +24,8 @@ rename_map = {
 }
 hours = erlt_df_2014b_3.hour_id.unique()
 hours_lab = "_".join([str(hour) for hour in hours])
+erlt_df_2014b_3["rate_per_start"] = erlt_df_2014b_3.rate_per_start.round(6)
+
 erlt_df_2014b_3["moves"] = erlt_df_2014b_3.moves.map(
     {"MOVES 2014b": "2014b", "MOVES 3": "3"}
 )

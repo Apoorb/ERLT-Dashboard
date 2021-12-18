@@ -60,7 +60,6 @@ fig = px.line_3d(
     line_dash="Road Description",
     color="Road Description",
 )
-fig.show()
 import plotly.graph_objects as go
 
 # Filter to road type.
@@ -100,7 +99,6 @@ fig.update_layout(
     scene_camera_eye=dict(x=-2, y=-1, z=0.5),
     margin=dict(l=10, r=10, b=10, t=10),
 )
-fig.show()
 
 
 fig = px.line(
@@ -111,7 +109,6 @@ fig = px.line(
     color="Road Description",
     line_dash="Road Description",
 )
-fig.show()
 fig = px.line(
     plt_test_df.loc[plt_test_df["Average Speed (mph)"] == 50],
     x="Year",
@@ -120,7 +117,6 @@ fig = px.line(
     color="Road Description",
     line_dash="Road Description",
 )
-fig.show()
 
 
 layout = dbc.Container(html.P("Running"))
