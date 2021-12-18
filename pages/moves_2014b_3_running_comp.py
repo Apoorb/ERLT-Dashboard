@@ -432,9 +432,7 @@ def update_bar_chart(hoverdata, sut_val, fuel_val, pollutant_val, year_val):
         pattern_shape_sequence=["+", "x"],
         template="plotly_dark",
     )
-    fig.update_traces(
-        texttemplate='%{text:.3s}',
-        textposition='outside',)
+    fig.update_traces(texttemplate="%{text:.3s}", textposition="outside")
     fig.update_layout(
         uniformtext_minsize=12,
         font=dict(family="Time New Roman", size=14, color="white"),

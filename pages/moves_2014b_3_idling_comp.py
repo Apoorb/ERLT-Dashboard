@@ -110,12 +110,12 @@ layout = dbc.Container(
             className="mt-3 mb-2",
         ),
         dbc.Row(
-                dbc.Col(
-                    dcc.Graph(
-                        id="erlt_comp_line_idle", style={"width": "100%", "height": "400px"}
-                    ),
-                    className="mb-2 col-md-8",
-                )
+            dbc.Col(
+                dcc.Graph(
+                    id="erlt_comp_line_idle", style={"width": "100%", "height": "400px"}
+                ),
+                className="mb-2 col-md-8",
+            )
         ),
         dbc.Row(
             [
@@ -194,7 +194,7 @@ layout = dbc.Container(
         ),
     ],
     fluid=True,
-    style={"padding-right": "40px", "padding-left": "40px"}
+    style={"padding-right": "40px", "padding-left": "40px"},
 )
 
 
@@ -259,9 +259,3 @@ def update_bar_chart(sut_val, fuel_val, pollutant_val):
         hoverlabel=dict(font_size=16, font_family="Rockwell"),
     )
     return fig
-
-
-
-
-
-

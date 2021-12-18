@@ -6,9 +6,17 @@ import dash_bootstrap_components as dbc
 
 from app import server
 from app import app
-from pages import (Running, Starts, Idling, ExtendedIdling, home,
-                   moves_2014b_3_running_comp, moves_2014_3_starts_comp,
-                   moves_2014b_3_idling_comp, moves_2014b_3_extidle_comp)
+from pages import (
+    Running,
+    Starts,
+    Idling,
+    ExtendedIdling,
+    home,
+    moves_2014b_3_running_comp,
+    moves_2014_3_starts_comp,
+    moves_2014b_3_idling_comp,
+    moves_2014b_3_extidle_comp,
+)
 
 # make a reuseable navitem for the different examples
 nav_item_h = dbc.NavItem(dbc.NavLink("Home", href="/home"))
@@ -28,9 +36,7 @@ dropdown = dbc.DropdownMenu(
             className="h5",
         ),
         dbc.DropdownMenuItem(
-            "MOVES 2014b vs. 3 Starts",
-            href="/moves_2014_3_starts_comp",
-            className="h5",
+            "MOVES 2014b vs. 3 Starts", href="/moves_2014_3_starts_comp", className="h5"
         ),
         dbc.DropdownMenuItem(
             "MOVES 2014b vs. 3 Idling",

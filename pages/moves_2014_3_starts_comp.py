@@ -109,12 +109,12 @@ layout = dbc.Container(
             className="mt-3 mb-2",
         ),
         dbc.Row(
-                dbc.Col(
-                    dcc.Graph(
-                        id="erlt_comp_line_st", style={"width": "100%", "height": "400px"}
-                    ),
-                    className="mb-2 col-md-8",
-                )
+            dbc.Col(
+                dcc.Graph(
+                    id="erlt_comp_line_st", style={"width": "100%", "height": "400px"}
+                ),
+                className="mb-2 col-md-8",
+            )
         ),
         dbc.Row(
             [
@@ -193,7 +193,7 @@ layout = dbc.Container(
         ),
     ],
     fluid=True,
-    style={"padding-right": "40px", "padding-left": "40px"}
+    style={"padding-right": "40px", "padding-left": "40px"},
 )
 
 
@@ -225,7 +225,8 @@ def set_fuel_value(available_options):
 )
 def update_bar_chart(sut_val, fuel_val, pollutant_val):
     max_em = erlt_df_2014b_3_1.loc[
-        lambda df: (df.Pollutant == pollutant_val), "Starts Emission Rate (grams/starts)"
+        lambda df: (df.Pollutant == pollutant_val),
+        "Starts Emission Rate (grams/starts)",
     ].values.max()
 
     min_em = 0
@@ -258,9 +259,3 @@ def update_bar_chart(sut_val, fuel_val, pollutant_val):
         hoverlabel=dict(font_size=16, font_family="Rockwell"),
     )
     return fig
-
-
-
-
-
-
