@@ -104,42 +104,42 @@ layout = dbc.Container(
             ),
             className="mt-4 mb-4",
         ),
-        dbc.Row(
-            dash_table.DataTable(
-                id="datatable_interactivity",
-                columns=[
-                    {"name": i, "id": i, "type": table_type(erlt_df_long_fil[i])}
-                    for i in erlt_df_long_fil.columns
-                ],
-                data=erlt_df_long_fil.to_dict("records"),
-                filter_action="native",
-                sort_action="native",
-                sort_mode="multi",
-                column_selectable="single",
-                row_selectable=False,
-                selected_columns=[],
-                selected_rows=[],
-                page_action="native",
-                page_current=0,
-                page_size=20,
-                style_header={"backgroundColor": "rgb(30, 30, 30)", "color": "white"},
-                style_cell={
-                    "backgroundColor": "rgb(50, 50, 50)",
-                    "color": "white",
-                    "whiteSpace": "normal",
-                    "textAlign": "center",
-                    "height": "auto",
-                },
-                style_cell_conditional=[
-                    {"if": {"column_id": "Road Description"}, "width": "11%"},
-                    {"if": {"column_id": "Average Speed Bin (mph)"}, "width": "10%"},
-                ],
-                style_filter={"height": "25px"},
-                css=[{"selector": "table", "rule": "table-layout: fixed"}],
-                # Wrap text
-            ),
-            className="dbc_dark",
-        ),
+        # dbc.Row(
+        #     dash_table.DataTable(
+        #         id="datatable_interactivity",
+        #         columns=[
+        #             {"name": i, "id": i, "type": table_type(erlt_df_long_fil[i])}
+        #             for i in erlt_df_long_fil.columns
+        #         ],
+        #         data=erlt_df_long_fil.to_dict("records"),
+        #         filter_action="native",
+        #         sort_action="native",
+        #         sort_mode="multi",
+        #         column_selectable="single",
+        #         row_selectable=False,
+        #         selected_columns=[],
+        #         selected_rows=[],
+        #         page_action="native",
+        #         page_current=0,
+        #         page_size=20,
+        #         style_header={"backgroundColor": "rgb(30, 30, 30)", "color": "white"},
+        #         style_cell={
+        #             "backgroundColor": "rgb(50, 50, 50)",
+        #             "color": "white",
+        #             "whiteSpace": "normal",
+        #             "textAlign": "center",
+        #             "height": "auto",
+        #         },
+        #         style_cell_conditional=[
+        #             {"if": {"column_id": "Road Description"}, "width": "11%"},
+        #             {"if": {"column_id": "Average Speed Bin (mph)"}, "width": "10%"},
+        #         ],
+        #         style_filter={"height": "25px"},
+        #         css=[{"selector": "table", "rule": "table-layout: fixed"}],
+        #         # Wrap text
+        #     ),
+        #     className="dbc_dark",
+        # ),
     ],
     fluid=True,
     style={"padding-right": "40px", "padding-left": "40px"},
