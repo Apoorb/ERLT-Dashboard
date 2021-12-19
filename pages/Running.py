@@ -209,18 +209,16 @@ layout = dbc.Container(
     style={"padding-right": "40px", "padding-left": "40px"},
 )
 
+
 @app.callback(
     Output("datatable_interactivity_run", "data"),
-    [
-        Input("area-dropdown", "value"),
-        Input("pollutant-dropdown", "value"),
-    ],
+    [Input("area-dropdown", "value"), Input("pollutant-dropdown", "value")],
 )
 def update_table(area_val, pol_val):
     erlt_df_area_pol = erlt_df_long_fil.loc[
         (erlt_df_long_fil.Area == area_val) & (erlt_df_long_fil.Pollutant == pol_val)
     ]
-    return erlt_df_area_pol.to_dict('records')
+    return erlt_df_area_pol.to_dict("records")
 
 
 @app.callback(
