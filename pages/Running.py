@@ -264,8 +264,8 @@ def update_3d_surf(area_val, pol_val, rdtype_val):
         font=dict(family="Time New Roman", size=14, color="white"),
         scene=dict(
             camera_eye=dict(x=-2, y=-1, z=0.5),
-            xaxis_title="Year",
-            yaxis_title="Average Speed (mph)",
+            xaxis_title="Average Speed (mph)",
+            yaxis_title="Year",
             zaxis_title="Running Emission (gram/mile)",
         ),
         template="plotly_dark",
