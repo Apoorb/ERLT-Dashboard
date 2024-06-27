@@ -130,7 +130,7 @@ layout = dbc.Container(
                 ),
             ],
             justify="fuel-radio-idle",
-            no_gutters=True,
+            className="g-0",
             style={"height": "1.5rem", "font-size": "1rem"},
         ),
         dbc.Row(
@@ -147,7 +147,7 @@ layout = dbc.Container(
                 ),
             ],
             justify="fuel-radio-idle",
-            no_gutters=True,
+            className="g-0",
             style={"height": "1.5rem", "font-size": "1rem"},
         ),
         dbc.Row(

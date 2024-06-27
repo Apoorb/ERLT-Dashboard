@@ -129,7 +129,7 @@ layout = dbc.Container(
                 ),
             ],
             justify="start",
-            no_gutters=True,
+            className="g-0",
             style={"height": "1.5rem", "font-size": "1rem"},
         ),
         dbc.Row(
@@ -146,7 +146,7 @@ layout = dbc.Container(
                 ),
             ],
             justify="start",
-            no_gutters=True,
+            className="g-0",
             style={"height": "1.5rem", "font-size": "1rem"},
         ),
         dbc.Row(
