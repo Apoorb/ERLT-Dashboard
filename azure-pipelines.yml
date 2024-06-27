@@ -30,8 +30,7 @@ stages:
   displayName: Build stage
   jobs:
   - job: BuildJob
-    pool:
-      vmImage: $(vmImageName)
+    pool: local
     steps:
     - task: UsePythonVersion@0
       inputs:
@@ -66,8 +65,7 @@ stages:
   condition: succeeded()
   jobs:
   - deployment: DeploymentJob
-    pool:
-      vmImage: $(vmImageName)
+    pool: local
     environment: $(environmentName)
     strategy:
       runOnce:
