@@ -6,5 +6,5 @@ gunicorn
 parquet
 pyarrow
 fastparquet
-dash_bootstrap_components==0.12.2
+dash_bootstrap_components
 seaborn
