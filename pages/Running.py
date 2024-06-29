@@ -6,7 +6,7 @@ from dash import html
 from dash import dcc
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
-from app import app
+from my_app import app
 from dash import dash_table
 import sys
 

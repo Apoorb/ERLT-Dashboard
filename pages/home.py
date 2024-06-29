@@ -4,7 +4,7 @@ from dash import dcc
 import dash_bootstrap_components as dbc
 
 ### Import Dash Instance ###
-from app import app
+from my_app import app
 
 # needed only if running this as a single page app
 # external_stylesheets = [dbc.themes.DARKLY]
