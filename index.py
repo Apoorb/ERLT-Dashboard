@@ -4,8 +4,8 @@ from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 
 
-from app import server
-from app import app
+from my_app import server
+from my_app import app
 from pages import (
     Running,
     Starts,
@@ -140,5 +140,5 @@ app.layout = dbc.Container(
 )
 
 if __name__ == "__main__":
-    # app.run_server(host="127.0.0.1", debug=True)
-    app.run_server(debug=True)
+    app.run_server(host='0.0.0.0', port='8000')
+    # app.run_server(debug=True)
